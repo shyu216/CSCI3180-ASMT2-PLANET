@@ -33,7 +33,7 @@ class Engine:
             self._player = Player(num_of_row - 1, 0, p_hp, p_ox)
             
             # TODO: initilize the position of the player 
-            #       using the set_occupant and set_occupying method;
+            #       using the set_occupant and occupying setter;
             #       add the player to _actors array 
 
             # END TODO 
@@ -41,7 +41,7 @@ class Engine:
 
             for gno in range(num_of_goblins):
                 # TODO: initilize each Goblin on the map
-                #       using the set_occupant and set_occupying method;
+                #       using the set_occupant and occupying setter;
                 #       add each Goblin to _actors array 
 
                 # END TOD
@@ -64,7 +64,7 @@ class Engine:
 
     # check if the game ends and return if the player win or not.
     def state(self):
-        # TODO: check if the game ends and 
+         # TODO: check if the game ends and 
         #       return an integer for the game status 
 
         # END TODO 

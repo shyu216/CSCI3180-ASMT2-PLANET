@@ -45,15 +45,17 @@ public class Player extends GameCharacter {
 			do {
 				System.out.printf("Next move (U, D, R, L): ");
 				Scanner input = new Scanner(System.in);
-				char nextAct = input.next().charAt(0);
+				String inputString = input.next();
+				char nextAct = inputString.charAt(0);
 				for (int i = 0; i < this.validActions.length; ++i) {
 					if (validActions[i] == nextAct) {
 						correctAct = true;
 						break;
 					}
 				}
+				if (inputString.length() > 1) correctAct = false;
 				if (!correctAct) {
-					System.out.printf("Invalid command. Please enter one of {U, D, R, L}.%n");
+					System.out.printf("Invalid command %s. Please enter one of {U, D, R, L}.%n", inputString);
 				} else {
 					nextPos = this.cmd2Pos(nextAct);
 				}
@@ -69,13 +71,16 @@ public class Player extends GameCharacter {
 			} else {
 				nextCell = null;
 			}
+			if (!this.active) {
+				this.occupying.removeOccupant();
+			}
 		}
 	}
 	
 	@Override
 	public boolean interactWith(Object comer) {
 		if (comer instanceof Goblin) {
-			System.out.printf("\033[2;31mPlayer meets a Goblin! Player\'s HP -%d.\033[0m%n", ((Goblin)comer).getDamage());
+			System.out.printf("\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m%n", ((Goblin)comer).getDamage());
 			this.hp -= ((Goblin)comer).getDamage();
 			((Goblin)comer).setActive(false);
 			return false;

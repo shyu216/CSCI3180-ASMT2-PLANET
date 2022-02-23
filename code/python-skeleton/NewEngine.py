@@ -37,19 +37,19 @@ class NewEngine:
             self._player = Player(num_of_row - 1, 0, p_hp, p_ox)
             
             # TODO: initilize the position of the player 
-            #       using the set_occupant and set_occupying method;
+            #       using the set_occupant and occupying setter;
             #       add the player to _actors array
 
             for gno in range(num_of_goblins):
                 # TODO: initilize each Goblin on the map
-                #       using the set_occupant and set_occupying method;
+                #       using the set_occupant and occupying setter;
                 #       add each Goblin to _actors array 
 
                 # END TODO 
 
             for tno in range(num_of_traps):
                 # TODO: initilize each Trap on the map
-                #       using the set_occupant and set_occupying method;
+                #       using the set_occupant and occupying setter;
 
                 # END TODO 
 
@@ -72,19 +72,21 @@ class NewEngine:
         self.print_result()
 
     def clean_up(self):
-        # TODO: 
+        # TODO: remove all objects in _actors which is not active 
 
         # END TODO 
 
     # check if the game ends and return if the player win or not.
     def state(self):
-        # TODO: 
+        # TODO: check if the game ends and 
+        #       return an integer for the game status 
 
         # END TODO 
 
     def print_info(self):
         self._map.display()
-        # TODO: 
+        # TODO: display the remaining oxygen, HP 
+        #       and the number of traps surrounding the player 
 
         # END TODO
 

@@ -16,6 +16,7 @@ public class Trap {
 	}
 
 	public boolean interactWith(Object comer) {
+		this.occupying.removeOccupant();
 		if (comer instanceof Goblin) {
 			((Goblin)comer).setActive(false);
 			return false;

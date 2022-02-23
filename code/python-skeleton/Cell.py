@@ -9,7 +9,10 @@ class Cell:
         self._color = None 
         self._hours = 0
     
-    # TODO: hours getter
+    # TODO: hours getter and setter
+
+    # TODO: occupant getter
+
 
     def set_occupant(self, obj):
         # TODO: set occupant for the Plain cell 
@@ -21,10 +24,6 @@ class Cell:
         # TODO: remove the occupant 
 
         # END TODO
-
-    @property 
-    def occupant(self):
-        return self._occupant
 
     def display(self):
         # TODO: print a string to display the cell 

@@ -1,3 +1,4 @@
+from abc import abstractmethod
 class GameCharacter:
     def __init__(self, row, col):
         self._row = row
@@ -43,7 +44,8 @@ class GameCharacter:
     @abstractmethod
     def interact_with(self, comer):
         pass
-
+    
+    @abstractmethod
     def display(self):
         # TODO: return _color followed by _character for displaying 
 

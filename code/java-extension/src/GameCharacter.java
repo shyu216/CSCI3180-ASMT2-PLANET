@@ -64,7 +64,7 @@ public abstract class GameCharacter {
 	}
 	
 	public String display() {
-		return "\033[2;97m" + this.character;
+		return String.format("%s%s", this.color, this.character);
 	}
 	
 	public abstract boolean interactWith(Object comer);

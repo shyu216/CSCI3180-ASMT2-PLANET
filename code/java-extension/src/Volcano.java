@@ -16,13 +16,17 @@ public class Volcano extends Mountain {
 	public void act(Map map) {
 		this.countdown -= 1;
 		if (this.countdown == 0) {
+			System.out.println("\033[1;33;41mVolcano erupts! \033[0;0m");
 			this.countdown = this.frequency;
 			ArrayList<Cell> cells = map.getNeighbours(this.row, this.col);
 			for (int i = 0; i < cells.size(); ++i) {
 				Object occ = cells.get(i).getOccupant();
 				if(occ != null) {
-					if (occ instanceof GameCharacter) {
-						((GameCharacter)occ).setActive(false);
+					if (occ instanceof Goblin) {
+						((Goblin)occ).setActive(false);
+						((Goblin)occ).occupying.removeOccupant();
+					} else if (occ instanceof Player) {
+						((Player)occ).setHp(((Player)occ).getHp() - 1);
 					}
 				}
 			}

@@ -21,16 +21,20 @@ public class Map {
 	
 	public Cell getCell(int row, int col) {
 		if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
-			System.out.println("Next move is out of boundary!");
+			System.out.printf("\033[1;31;46mNext move is out of boundary!\033[0;0m%n");
 			return null;
 		} else {
 			return this.cells[row][col];
 		}
 	}
 	
-	public void buildCell(int row, int col, Cell cell) {
+	public boolean buildCell(int row, int col, Cell cell) {
 		if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
 			this.cells[row][col] = cell;
+			return true;
+		} else {
+			System.out.printf("\033[1;31;46mThe position (%d, %d) is out of boundary!\033[0;0m%n", row, col);
+			return false;
 		}
 	}
 	

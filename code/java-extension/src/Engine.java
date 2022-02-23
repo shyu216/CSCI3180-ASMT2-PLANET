@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.io.*;
 
 public class Engine {
@@ -114,10 +114,12 @@ public class Engine {
 	}
 	
 	public void cleanUp() {
-		for (int i = 0; i < actors.size(); ++i) {
-			if (this.actors.get(i) instanceof GameCharacter) {
-				if (!((GameCharacter)this.actors.get(i)).getActive()) {
-					this.actors.remove(i);
+		Iterator<Object> it = actors.iterator();
+		while (it.hasNext()) {
+			Object o = it.next();
+			if (o instanceof GameCharacter) {
+				if (!((GameCharacter)o).getActive()) {
+					it.remove();
 				}
 			}
 		}
@@ -148,9 +150,9 @@ public class Engine {
 	
 	public void printResult() {
 		if (this.state() == 1) {
-			System.out.println("Congrats! You win!");
+			System.out.println("\033[1;33;41mCongrats! You win!\033[0;0m");
 		} else if (this.state() == -1) {
-			System.out.println("Bad Luck! You lose.");
+			System.out.println("\033[1;33;41mBad Luck! You lose.\033[0;0m");
 		}
 	}
 }
