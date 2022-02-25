@@ -21,3 +21,7 @@ make run
 
 ### powershell in vscode
     crtl + `
+
+### 
+
+python StrangePlanet.py basic
