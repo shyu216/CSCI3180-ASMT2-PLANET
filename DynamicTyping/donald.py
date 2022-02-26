@@ -5,6 +5,9 @@ class Duck:
 
     def feathers(self):
         print ("这鸭子拥有白色与灰色羽毛" )
+
+    def donald(self):
+        print ("我不是donald")
  
 class Person:
     def quack(self):
