@@ -10,20 +10,29 @@ class Cell:
         self._hours = 0
     
     # TODO: hours getter and setter
+    @property
     def hours(self):
         return self._hours
+    @hours.setter
+    def hours(self, hr):
+        self._hours = hr
 
     # TODO: occupant getter
+    @property
     def occupant(self):
         return self._occupant
 
     def set_occupant(self, obj):
         # TODO: set occupant for the Plain cell 
         #       return whether success or not
-        if self.occupant() == None or self.occupant().interact_with(obj):
+        # if self.occupant() != None:
+        #     print (obj.name()+" meets "+self.occupant().name())
+        if self.occupant == None or self.occupant.interact_with(obj):
             self._occupant = obj
+            # print("Cell [%d][%d] is occupied by %s"%(self._row, self._col, self._occupant.name))
             return True
         else:
+            # print("Cell [%d][%d] is unavailable")
             return False
         # END TODO
 
@@ -35,8 +44,11 @@ class Cell:
     def display(self):
         # TODO: print a string to display the cell 
         #       and the occupant in the cell 
-        if self._occupant != None:
-            print("%s %s%s \033[0m   " %(self._color, self.occupant.display(), self.color), end='')
+        # print("reach here")
+        if self.occupant == None:
+            print("%s   \033[0m   " %(self._color), end='')
+        else:
+            print("%s %s%s \033[0m   " %(self._color, self.occupant.display(), self._color), end='')
         # END TODO
 
 class Plain(Cell):
@@ -52,6 +64,7 @@ class Mountain(Cell):
 
     def set_occupant(self, obj):
         # TODO: return False
+        # print("Player cannot set occupant in mountain!!!")
         return False
         # END TODO
     

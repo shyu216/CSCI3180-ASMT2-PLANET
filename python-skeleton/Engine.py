@@ -41,6 +41,7 @@ class Engine:
                             self._map.build_cell(i, j, Plain(i,j))
                         elif buf[j] == "M":
                             self._map.build_cell(i, j, Mountain(i, j))
+                            self._map.get_cell(i, j).set_occupant(None)
                         elif buf[j] == "S":
                             self._map.build_cell(i, j, Swamp(i, j))
                         else:
@@ -56,7 +57,7 @@ class Engine:
             self._player = Player(num_of_row-1, 0, p_hp, p_ox)
             initcell = self._map.get_cell(num_of_row-1, 0)
             initcell.set_occupant(self._player)
-            self._player.occupying(initcell)
+            self._player.occupying = initcell
             self._actors.append(self._player)
             # END TODO 
 
@@ -81,7 +82,7 @@ class Engine:
                 self._actors.append(gob)
                 initcell = self._map.get_cell(gobrow, gobcol)
                 initcell.set_occupant(gob)
-                gob.occupying(initcell)
+                gob.occupying = initcell
                 # END TOD
 
     def run(self):
@@ -106,9 +107,9 @@ class Engine:
     def state(self):
         # TODO: check if the game ends and 
         #       return an integer for the game status 
-        if self._player.hp() <= 0 or self._player.oxygen() <= 0:
+        if self._player.hp <= 0 or self._player.oxygen <= 0:
             return -1
-        elif self._player.row() == 0 and self._player.col() == self._map.cols()-1:
+        elif self._player.row == 0 and self._player.col == self._map.cols-1:
             return 1
         else:
             return 0
@@ -117,7 +118,7 @@ class Engine:
     def print_info(self):
         self._map.display()
         # TODO: display the remaining oxygen and HP 
-        print("Oxygen: %d, HP: %d" %(self._player.oxygen(), self._player.hp()))
+        print("Oxygen: %d, HP: %d" %(self._player.oxygen, self._player.hp))
         # END TODO 
 
     def print_result(self):

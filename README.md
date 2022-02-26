@@ -23,5 +23,4 @@ make run
     crtl + `
 
 ### 
-
 python StrangePlanet.py basic

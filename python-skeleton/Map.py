@@ -8,10 +8,12 @@ class Map:
         self._cells = [[Cell() for x in range(cols)] for y in range(rows)]
     
     #TODO: rows getter
+    @property
     def rows(self):
         return self._rows
     
     #TODO: cols getter
+    @property
     def cols(self):
         return self._cols
     
@@ -24,7 +26,7 @@ class Map:
             return None 
         else:
             # return a cell 
-            return Cell(row, col)
+            return self._cells[row][col]
         # END TODO 
 
     def build_cell(self, row, col, cell):
@@ -59,8 +61,9 @@ class Map:
         print()
         for i in range(self._rows):
             print("%d "%(i), end='')
+            # print(self._cells[i])
             for j in range(self._cols):
-                self._cells[i][j].display
+                self._cells[i][j].display()
             print()
             print()
         # END TODO

@@ -11,30 +11,37 @@ class GameCharacter:
         self._color = "\033[1;31m"
     
     #TODO: name getter
+    @property
     def name(self):
         return self._name
     
     #TODO: row getter
+    @property
     def row(self):
         return self._row
 
     #TODO: col getter
+    @property
     def col(self):
         return self._col
     
     #TODO: active getter and setter
-    def active(self, active = True):
-        if active != True:
-            self._active = active
+    @property
+    def active(self):
         return self._active
-        # what should be return for setter???
-        # what if using active???
+    @active.setter
+    def active(self, active):
+        self._active = active
+    # what should be return for setter??? decorator!!!
+    # what if using active???
 
     #TODO: occupying getter and setter
-    def occupying(self, cell = None):
-        if cell != None:
-            self._occupying = cell
+    @property
+    def occupying(self):
         return self._occupying
+    @occupying.setter
+    def occupying(self, cell):
+        self._occupying = cell
 
     def cmd_to_pos(self, char):
         next_pos = [self._row, self._col]
@@ -75,16 +82,20 @@ class Player(GameCharacter):
         self._character = "A"
 
     #TODO: hp getter and setter
-    def hp(self, hp = 10):
-        if hp != 10:
-            self._hp = hp
+    @property
+    def hp(self):
         return self._hp
+    @hp.setter
+    def hp(self, hp):
+        self._hp = hp
 
     #TODO: oxygen getter and setter
-    def oxygen(self, ox = 10):
-        if ox != 10:
-            self._oxygen = ox
+    @property
+    def oxygen(self):
         return self._oxygen
+    @oxygen.setter
+    def oxygen(self, ox):
+        self._oxygen = ox
 
     def act(self, map):
         next_cell = None
@@ -102,14 +113,15 @@ class Player(GameCharacter):
                         break
                 if not correctact:
                     print("Invalid command. Please enter one of {U, D, R, L}.")
+                    action = input("Next move (U, D, R, L): ".format(self._row, self._col))
                 
             next_cell = map.get_cell(next_pos[0], next_pos[1])
             if next_cell != None and next_cell.set_occupant(self):
                 self._row = next_pos[0]
                 self._col = next_pos[1]
-                self._oxygen -= self._occupying.oxygen()
+                self._oxygen -= self._occupying.hours
                 self._occupying.remove_occupant()
-                self.occupying(next_cell)
+                self.occupying = next_cell
             else:
                 next_cell = None
             # END TODO 
@@ -119,9 +131,9 @@ class Player(GameCharacter):
         if comer.name == "Goblin":
             print('\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m' %(comer.damage))
              # TODO: interact_with method 
-            self._hp -= comer.damage()
-            comer.active(False)
-            return True
+            self._hp -= comer.damage
+            comer.active = False
+            return False
         return False
             # END TODO 
 
@@ -136,6 +148,7 @@ class Goblin(GameCharacter):
         self._character = "G"
 
     #TODO: damage getter
+    @property
     def damage(self):
         return self._damage
 
@@ -146,11 +159,11 @@ class Goblin(GameCharacter):
         nextpos = self.cmd_to_pos(netxmove)
         nextcell = map.get_cell(nextpos[0], nextpos[1])
         if nextcell != None and nextcell.set_occupant(self):
-            self._cur_act += 1;
+            self._cur_act += 1
             self._row = nextpos[0]
             self._col = nextpos[1]
             self._occupying.remove_occupant()
-            self.occupying(nextcell) 
+            self.occupying = nextcell
             print("\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m" % (self._row, self._col))
         if not self._active:
             self._occupying.remove_occupant()
@@ -165,7 +178,9 @@ class Goblin(GameCharacter):
             )
             # TODO: update properties of the player and the Goblin 
             #       return whether the Player successfully enter the cell 
-            self.active(False)
+            # comer.hp = comer.hp - self.damage
+            comer.hp -= self.damage
+            self.active = False
             return True
         return False
             # END TODO
