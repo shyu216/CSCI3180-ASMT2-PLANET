@@ -22,5 +22,5 @@ make run
 ### powershell in vscode
     crtl + `
 
-### 
-python StrangePlanet.py basic
+### md 分隔符
+<div STYLE="page-break-after: always;"></div>

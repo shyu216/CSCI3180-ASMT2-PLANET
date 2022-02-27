@@ -1,11 +1,6 @@
 # single function multiple type
-def check_type(target1, target2):
-    if type(target1) == type(target2):
-        return True
-    else:
-        return False
+def add(target1, target2):
+    return target1 + target2
 
-if check_type("you", "me"):
-    print("same")
-if not check_type(3.14, 3):
-    print("different")
+print(add("hello ", "world "))
+print(add(3.14, 100))
