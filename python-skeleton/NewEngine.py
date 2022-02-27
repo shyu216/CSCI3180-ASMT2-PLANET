@@ -122,6 +122,7 @@ class NewEngine:
                 trapcol = int(buf[1])
                 trap = Trap(traprow, trapcol)
                 initcell = self._map.get_cell(traprow, trapcol)
+                ### DUCK!
                 initcell.set_occupant(trap)
                 trap.occupying = initcell
                 # END TODO
@@ -180,7 +181,13 @@ class NewEngine:
         self._map.display()
         # TODO: display the remaining oxygen, HP
         #       and the number of traps surrounding the player
-        print("Oxygen: %d, HP: %d" % (self._player.oxygen, self._player.hp))
+        num = 0 
+        cells = self._map.get_neighbours(self._player.row, self._player.col)
+        for obj in cells:
+            if obj.occupant != None:
+                if obj.occupant.name == "Trap":
+                    num += 1
+        print("Oxygen: %d, HP: %d, Trap: %d" % (self._player.oxygen, self._player.hp, num))
         # END TODO
 
     def print_result(self):
