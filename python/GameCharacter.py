@@ -17,7 +17,6 @@
 # ∗/
 
 from abc import abstractmethod
-from os import curdir
 
 
 class GameCharacter:
@@ -87,7 +86,6 @@ class GameCharacter:
     def interact_with(self, comer):
         pass
 
-    @abstractmethod
     def display(self):
         # TODO: return _color followed by _character for displaying
         return "%s%s" % (self._color, self._character)
@@ -125,8 +123,7 @@ class Player(GameCharacter):
         next_cell = None
         next_pos = [0, 0]
         while next_cell == None:
-            action = input("Next move (U, D, R, L): ".format(
-                self._row, self._col))
+            action = input('Next move (U, D, R, L): ')
             # TODO: act method
             # python has no do while
             correctact = False
@@ -150,13 +147,15 @@ class Player(GameCharacter):
                 self.occupying = next_cell
             else:
                 next_cell = None
+            if not self._active:
+                self._occupying.remove_occupant()
+                self._occupying = None
             # END TODO
 
     # return whether comer entering the cell successfully or not
     def interact_with(self, comer):
         if comer.name == "Goblin":
-            print(
-                '\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m' % (comer.damage))
+            print('\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m' %(comer.damage))
             # TODO: interact_with method
             self._hp -= comer.damage
             comer.active = False
@@ -185,16 +184,17 @@ class Goblin(GameCharacter):
         netxmove = self._actions[self._cur_act % len(self._actions)]
         nextpos = self.cmd_to_pos(netxmove)
         nextcell = map.get_cell(nextpos[0], nextpos[1])
+        self._cur_act += 1
         if nextcell != None and nextcell.set_occupant(self):
-            self._cur_act += 1
             self._row = nextpos[0]
             self._col = nextpos[1]
             self._occupying.remove_occupant()
             self.occupying = nextcell
-            print("\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m" % (
-                self._row, self._col))
+            print('\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m' % (self._row, self._col))
         if not self._active:
+            print("\033[1;31;46mGoblin dies right after the movement.\033[0;0m")
             self._occupying.remove_occupant()
+            self._occupying = None
         # END TODO
 
     # return whether comer entering the cell successfully or not

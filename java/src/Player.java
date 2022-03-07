@@ -71,13 +71,17 @@ public class Player extends GameCharacter {
 			} else {
 				nextCell = null;
 			}
+			if (!this.active) {
+				this.occupying.removeOccupant();
+				this.occupying = null;
+			}
 		}
 	}
 	
 	@Override
 	public boolean interactWith(GameCharacter comer) {
 		if (comer.name.equals("Goblin")) {
-			System.out.printf("\033[1;31;46mPlayer meets a Goblin! Player's HP - %d.\033[0m%n", ((Goblin)comer).getDamage());
+			System.out.printf("\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m%n", ((Goblin)comer).getDamage());
 			this.hp -= ((Goblin)comer).getDamage();
 			((Goblin)comer).setActive(false);
 			return false;

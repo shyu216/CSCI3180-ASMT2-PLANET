@@ -24,7 +24,6 @@ from GameCharacter import Player, Goblin
 class Engine:
     def __init__(self, data_file):
         self._actors = []
-        self._remove = []
         self._map = None
         self._player = None
         with open(data_file, "r") as fp:

@@ -54,7 +54,7 @@ class Volcano(Mountain):
     # END TODO
 
     def display(self):
-        # TODO: return a string representing the Volcano
+        # TODO: print a colored string representing the Volcano together with countdown information. 
         print("%s \033[2;97m%d%s \033[0m   " %
               (self._color, self._countdown, self._color), end='')
     # END TODO

@@ -42,6 +42,7 @@ public class Map {
 		ArrayList<Cell> returnCells = new ArrayList<Cell>();
 		for (int i = Math.max(0, row - 1); i <= Math.min(row + 1, this.rows - 1); ++i) {
 			for (int j = Math.max(0, col - 1); j <= Math.min(col + 1, this.cols - 1); ++j) {
+				if (i == row && j == col) continue;
 				returnCells.add(this.cells[i][j]);
 			}
 		}

@@ -18,9 +18,11 @@ public class Trap {
 	public boolean interactWith(Object comer) {
 		this.occupying.removeOccupant();
 		if (comer instanceof Goblin) {
+			System.out.printf("\033[1;31;43mA goblin entered a trap at (%d, %d)and died.\033[0;0m%n", this.row, this.col);
 			((Goblin)comer).setActive(false);
 			return false;
 		} else if (comer instanceof Player) {
+			System.out.printf("\033[1;31;43mYou entered a trap at (%d, %d)! HP - 1.\033[0;0m%n", this.row, this.col);
 			((Player)comer).setHp(((Player)comer).getHp() - 1);
 			((Player)comer).setOxygen(((Player)comer).getOxygen() - 1);
 			return true;

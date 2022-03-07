@@ -20,11 +20,11 @@ from Cell import Cell
 
 
 class Map:
-    def __init__(self, rows, cols):
-        self._rows = rows
-        self._cols = cols
-        self._cells = [[Cell() for x in range(cols)] for y in range(rows)]
-
+    def __init__(self, height, width):
+        self._rows = height
+        self._cols = width
+        self._cells = [[Cell() for x in range(width)] for y in range(height)]
+    
     # TODO: rows getter
     @property
     def rows(self):
@@ -52,8 +52,7 @@ class Map:
         #       if not, add a cell (row, col) and return True
         #       return False otherwise
         if self._rows <= row or 0 > row or self._cols <= col or 0 > col:
-            print(
-                "\033[1;31;46mThe position (%d, %d) is out of boundary!\033[0;0m" % (row, col))
+            print('\033[1;31;46mThe position (%d, %d) is out of boundary!\033[0;0m' %(row, col))
             return False
         else:
             # return a cell
@@ -67,7 +66,8 @@ class Map:
         # TODO: return a list of neighboring cells of cell (row, col)
         for i in range(max(0, row-1), min(row+1, self._rows-1)+1):
             for j in range(max(0, col-1), min(col+1, self._cols-1)+1):
-                return_cells.append(self._cells[i][j])
+                if i != row or j != col:
+                    return_cells.append(self._cells[i][j])
         return return_cells
         # END TODO
 

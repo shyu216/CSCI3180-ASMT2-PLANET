@@ -25,9 +25,7 @@ from Volcano import Volcano
 
 class NewEngine:
     def __init__(self, data_file):
-        self._data_file = data_file
         self._actors = []
-        self._remove = []
         self._map = None
         self._player = None
         with open(data_file, "r") as fp:

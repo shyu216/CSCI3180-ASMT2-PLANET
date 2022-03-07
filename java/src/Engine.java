@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.io.*;
 
 public class Engine {
@@ -82,9 +82,11 @@ public class Engine {
 	}
 	
 	public void cleanUp() {
-		for (int i = 0; i < actors.size(); ++i) {
-			if (!(this.actors.get(i).getActive())) {
-				this.actors.remove(i);
+		Iterator<GameCharacter> it = actors.iterator();
+		while (it.hasNext()) {
+			GameCharacter o = it.next();
+			if (!o.getActive()) {
+				it.remove();
 			}
 		}
 	}

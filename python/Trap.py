@@ -42,14 +42,12 @@ class Trap:
         # TODO: Add game logic.
         self._occupying.remove_occupant()
         if comer.name == "Goblin":
-            print("\033[1;31;43mA goblin entered a trap at (%d, %d)and died.\033[0;0m" % (
-                self._row, self._col))
+            print('\033[1;31;43mA goblin entered a trap at (%d, %d)and died.\033[0;0m' % (self._row, self._col))
             # TODO: Add game logic.
             comer.active = False
             return False
         elif comer.name == "Player":
-            print("\033[1;31;43mYou entered a trap at (%d, %d)! HP - 1.\033[0;0m" %
-                  (self._row, self._col))
+            print('\033[1;31;43mYou entered a trap at (%d, %d)! HP - 1.\033[0;0m' % (self._row, self._col))
             # TODO: Add game logic.
             comer.hp -= 1
             comer.oxygen -= 1

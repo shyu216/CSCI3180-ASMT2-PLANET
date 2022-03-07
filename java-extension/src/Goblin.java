@@ -34,6 +34,7 @@ public class Goblin extends GameCharacter {
 		if (!this.active) {
 			System.out.println("\033[1;31;46mGoblin dies right after the movement.\033[0;0m");
 			this.occupying.removeOccupant();
+			this.occupying = null;
 		}
 	}
 	

@@ -55,7 +55,7 @@ public class Player extends GameCharacter {
 				}
 				if (inputString.length() > 1) correctAct = false;
 				if (!correctAct) {
-					System.out.printf("Invalid command %s. Please enter one of {U, D, R, L}.%n", inputString);
+					System.out.printf("Invalid command. Please enter one of {U, D, R, L}.%n");
 				} else {
 					nextPos = this.cmd2Pos(nextAct);
 				}
@@ -73,6 +73,7 @@ public class Player extends GameCharacter {
 			}
 			if (!this.active) {
 				this.occupying.removeOccupant();
+				this.occupying = null;
 			}
 		}
 	}
